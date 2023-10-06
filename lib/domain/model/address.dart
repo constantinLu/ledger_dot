@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'address.freezed.dart';
@@ -13,4 +15,7 @@ class Address with _$Address {
     String? postalCode,
     String? website,
   }) = _Address;
+
+  factory Address.empty() =>
+      Address(id: Random().nextInt(323424), street: "", city: "", county: "", country: "");
 }

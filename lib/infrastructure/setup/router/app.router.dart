@@ -34,7 +34,11 @@ class StackedRouterWeb extends _i12.RootStackRouter {
           routeData.argsAs<HomeViewArgs>(orElse: () => const HomeViewArgs());
       return _i12.CustomPage<dynamic>(
         routeData: routeData,
-        child: _i1.HomeView(key: args.key),
+        child: _i1.HomeView(
+          key: args.key,
+          viewIndex: args.viewIndex,
+          tabIndex: args.tabIndex,
+        ),
         opaque: true,
         barrierDismissible: false,
       );
@@ -50,9 +54,13 @@ class StackedRouterWeb extends _i12.RootStackRouter {
       );
     },
     IncomeViewRoute.name: (routeData) {
-      final pathParams = routeData.inheritedPathParams;
+      final queryParams = routeData.queryParams;
       final args = routeData.argsAs<IncomeViewArgs>(
-          orElse: () => IncomeViewArgs(tabId: pathParams.getInt('tabId')));
+          orElse: () => IncomeViewArgs(
+                  tabId: queryParams.getInt(
+                'tabId',
+                0,
+              )));
       return _i12.CustomPage<dynamic>(
         routeData: routeData,
         child: _i3.IncomeView(
@@ -128,8 +136,14 @@ class StackedRouterWeb extends _i12.RootStackRouter {
   @override
   List<_i12.RouteConfig> get routes => [
         _i12.RouteConfig(
-          HomeViewRoute.name,
+          '/#redirect',
           path: '/',
+          redirectTo: '/home',
+          fullMatch: true,
+        ),
+        _i12.RouteConfig(
+          HomeViewRoute.name,
+          path: '/home',
           children: [
             _i12.RouteConfig(
               DashboardViewRoute.name,
@@ -138,7 +152,7 @@ class StackedRouterWeb extends _i12.RootStackRouter {
             ),
             _i12.RouteConfig(
               IncomeViewRoute.name,
-              path: 'income/:tabId',
+              path: 'income',
               parent: HomeViewRoute.name,
             ),
             _i12.RouteConfig(
@@ -177,7 +191,7 @@ class StackedRouterWeb extends _i12.RootStackRouter {
               parent: HomeViewRoute.name,
             ),
           ],
-        )
+        ),
       ];
 }
 
@@ -186,11 +200,17 @@ class StackedRouterWeb extends _i12.RootStackRouter {
 class HomeViewRoute extends _i12.PageRouteInfo<HomeViewArgs> {
   HomeViewRoute({
     _i13.Key? key,
+    int viewIndex = 0,
+    int tabIndex = 0,
     List<_i12.PageRouteInfo>? children,
   }) : super(
           HomeViewRoute.name,
-          path: '/',
-          args: HomeViewArgs(key: key),
+          path: '/home',
+          args: HomeViewArgs(
+            key: key,
+            viewIndex: viewIndex,
+            tabIndex: tabIndex,
+          ),
           initialChildren: children,
         );
 
@@ -198,13 +218,21 @@ class HomeViewRoute extends _i12.PageRouteInfo<HomeViewArgs> {
 }
 
 class HomeViewArgs {
-  const HomeViewArgs({this.key});
+  const HomeViewArgs({
+    this.key,
+    this.viewIndex = 0,
+    this.tabIndex = 0,
+  });
 
   final _i13.Key? key;
 
+  final int viewIndex;
+
+  final int tabIndex;
+
   @override
   String toString() {
-    return 'HomeViewArgs{key: $key}';
+    return 'HomeViewArgs{key: $key, viewIndex: $viewIndex, tabIndex: $tabIndex}';
   }
 }
 
@@ -237,15 +265,15 @@ class DashboardViewArgs {
 class IncomeViewRoute extends _i12.PageRouteInfo<IncomeViewArgs> {
   IncomeViewRoute({
     _i13.Key? key,
-    required int tabId,
+    int tabId = 0,
   }) : super(
           IncomeViewRoute.name,
-          path: 'income/:tabId',
+          path: 'income',
           args: IncomeViewArgs(
             key: key,
             tabId: tabId,
           ),
-          rawPathParams: {'tabId': tabId},
+          rawQueryParams: {'tabId': tabId},
         );
 
   static const String name = 'IncomeView';
@@ -254,7 +282,7 @@ class IncomeViewRoute extends _i12.PageRouteInfo<IncomeViewArgs> {
 class IncomeViewArgs {
   const IncomeViewArgs({
     this.key,
-    required this.tabId,
+    this.tabId = 0,
   });
 
   final _i13.Key? key;
@@ -378,11 +406,15 @@ class SettingViewArgs {
 extension RouterStateExtension on _i11.RouterService {
   Future<dynamic> navigateToHomeView({
     _i13.Key? key,
+    int viewIndex = 0,
+    int tabIndex = 0,
     void Function(_i12.NavigationFailure)? onFailure,
   }) async {
     return navigateTo(
       HomeViewRoute(
         key: key,
+        viewIndex: viewIndex,
+        tabIndex: tabIndex,
       ),
       onFailure: onFailure,
     );
@@ -402,7 +434,7 @@ extension RouterStateExtension on _i11.RouterService {
 
   Future<dynamic> navigateToIncomeView({
     _i13.Key? key,
-    required int tabId,
+    int tabId = 0,
     void Function(_i12.NavigationFailure)? onFailure,
   }) async {
     return navigateTo(
@@ -480,11 +512,15 @@ extension RouterStateExtension on _i11.RouterService {
 
   Future<dynamic> replaceWithHomeView({
     _i13.Key? key,
+    int viewIndex = 0,
+    int tabIndex = 0,
     void Function(_i12.NavigationFailure)? onFailure,
   }) async {
     return replaceWith(
       HomeViewRoute(
         key: key,
+        viewIndex: viewIndex,
+        tabIndex: tabIndex,
       ),
       onFailure: onFailure,
     );
@@ -504,7 +540,7 @@ extension RouterStateExtension on _i11.RouterService {
 
   Future<dynamic> replaceWithIncomeView({
     _i13.Key? key,
-    required int tabId,
+    int tabId = 0,
     void Function(_i12.NavigationFailure)? onFailure,
   }) async {
     return replaceWith(

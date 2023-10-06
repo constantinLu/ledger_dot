@@ -20,6 +20,7 @@ class SideBar extends StatelessWidget {
 
       onDestinationSelected: (int index) {
         _homeModel.setIndex(index);
+        _homeModel.setUseIndex(true);
       },
       selectedIndex: _homeModel.currentIndex,
       destinations: [
