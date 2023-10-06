@@ -22,6 +22,7 @@ dependencies:
 
   #fab speed buttons
   flutter_speed_dial:
+  carousel_slider:
 
   printing: ^5.11.0
   #svg

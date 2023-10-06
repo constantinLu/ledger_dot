@@ -11,7 +11,10 @@ import '../../widget/sidebar/side_bar.dart';
 import '../home/home_model.dart';
 
 class HomeView extends StatelessWidget {
-  HomeView({super.key});
+  final int viewIndex;
+  final int tabIndex;
+
+  HomeView({super.key, this.viewIndex = 0, this.tabIndex = 0});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +31,7 @@ class HomeView extends StatelessWidget {
             SideBar(model: homeModel),
 
             /// BODY PAGE
-            Expanded(child: routeTo(homeModel.currentIndex)),
+            Expanded(child: routeTo(homeModel.processRoute(RouteArgs(viewIndex, tabIndex))))
           ],
         ),
 

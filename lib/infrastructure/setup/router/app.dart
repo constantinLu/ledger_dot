@@ -18,12 +18,12 @@ import '../../service/pdf/pdf_service.dart';
 import '../../service/pdf/pdf_service_web.dart';
 
 @StackedApp(routes: [
-  CustomRoute(page: HomeView, initial: true, children: [
+  CustomRoute(page: HomeView, initial: true, path: '/home', children: [
     CustomRoute(
       page: DashboardView,
       path: 'dashboard',
     ),
-    CustomRoute(page: IncomeView, path: 'income/:tabId'),
+    CustomRoute(page: IncomeView, path: 'income'),
     CustomRoute(page: ExpenseView),
     CustomRoute(page: AnalyticsView),
     CustomRoute(page: BankView),
@@ -40,12 +40,12 @@ import '../../service/pdf/pdf_service_web.dart';
 ])
 class Router {}
 
-Widget routeTo(int index) {
-  switch (index) {
+Widget routeTo(RouteArgs routeArgs) {
+  switch (routeArgs.viewIndex) {
     case 0:
       return DashboardView();
     case 1:
-      return IncomeView(tabId: 0);
+      return IncomeView(tabId: routeArgs.tabIndex);
     case 2:
       return ExpenseView();
     case 3:
@@ -65,4 +65,11 @@ Widget routeTo(int index) {
     default:
       return DashboardView();
   }
+}
+
+class RouteArgs {
+  final int viewIndex;
+  final int tabIndex;
+
+  const RouteArgs(this.viewIndex, this.tabIndex);
 }

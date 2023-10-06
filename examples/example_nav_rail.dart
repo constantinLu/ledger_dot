@@ -6,10 +6,11 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // Remove the debug banner
+        // Remove the debug banner
         debugShowCheckedModeBanner: false,
         theme: ThemeData(primarySwatch: Colors.indigo),
         home: const HomeScreen());
@@ -24,7 +25,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   final List<Widget> _screens = [
     // Content for Home tab
     Container(
@@ -65,34 +65,32 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
 
   int _selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Responsive site"),
       ),
-      bottomNavigationBar:  MediaQuery.of(context).size.width < 640?
-      BottomNavigationBar(
-          currentIndex: _selectedIndex,
-          unselectedItemColor: Colors.grey,
-          selectedItemColor: Colors.indigoAccent,
-          // called when one tab is selected
-          onTap: (int index) {
-            setState(() {
-              _selectedIndex = index;
-            });
-          },
-          // bottom tab items
-          items: const [
-            BottomNavigationBarItem(
-                icon: Icon(Icons.home), label: 'Home'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.feed), label: 'Feed'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.favorite), label: 'Favorites'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.settings), label: 'Settings')
-          ]):null,
+      bottomNavigationBar: MediaQuery.of(context).size.width < 640
+          ? BottomNavigationBar(
+              currentIndex: _selectedIndex,
+              unselectedItemColor: Colors.grey,
+              selectedItemColor: Colors.indigoAccent,
+              // called when one tab is selected
+              onTap: (int index) {
+                setState(() {
+                  _selectedIndex = index;
+                });
+              },
+              // bottom tab items
+              items: const [
+                  BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+                  BottomNavigationBarItem(icon: Icon(Icons.feed), label: 'Feed'),
+                  BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Favorites'),
+                  BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings')
+                ])
+          : null,
       body: Row(
         children: [
           if (MediaQuery.of(context).size.width >= 640)
@@ -104,14 +102,10 @@ class _HomeScreenState extends State<HomeScreen> {
               },
               selectedIndex: _selectedIndex,
               destinations: const [
-                NavigationRailDestination(
-                    icon: Icon(Icons.home), label: Text('Home')),
-                NavigationRailDestination(
-                    icon: Icon(Icons.feed), label: Text('Feed')),
-                NavigationRailDestination(
-                    icon: Icon(Icons.favorite), label: Text('Favorites')),
-                NavigationRailDestination(
-                    icon: Icon(Icons.settings), label: Text('Settings')),
+                NavigationRailDestination(icon: Icon(Icons.home), label: Text('Home')),
+                NavigationRailDestination(icon: Icon(Icons.feed), label: Text('Feed')),
+                NavigationRailDestination(icon: Icon(Icons.favorite), label: Text('Favorites')),
+                NavigationRailDestination(icon: Icon(Icons.settings), label: Text('Settings')),
               ],
 
               labelType: NavigationRailLabelType.all,
@@ -132,12 +126,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ],
               ),
-
             ),
           Expanded(child: _screens[_selectedIndex])
         ],
       ),
-
     );
   }
 }
