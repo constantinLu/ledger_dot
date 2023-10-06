@@ -2,8 +2,9 @@ import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:ledgerdot/presentation/view/home/home_model.dart';
 import 'package:ledgerdot/presentation/view/income/income_model.dart';
-import 'package:ledgerdot/presentation/view/income/tabs/client/client_capture_view.dart';
-import 'package:ledgerdot/presentation/view/income/tabs/invoice/invoices_view.dart';
+import 'package:ledgerdot/presentation/view/income/tabs/client/client_capture/client_capture_view.dart';
+import 'package:ledgerdot/presentation/view/income/tabs/client/client_view/client_view.dart';
+import 'package:ledgerdot/presentation/view/income/tabs/invoice/invoice_capture/invoice_capture_view.dart';
 import 'package:raven/raven.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
@@ -72,20 +73,17 @@ class IncomeView extends StatelessWidget {
             Expanded(
               child: TabBarView(
                 children: [
+                  /// INVOICE
                   Center(
                     child: Icon(Icons.add_box),
                   ),
-                  AddInvoice(),
-                  Center(
-                    child: Icon(Icons.settings),
-                  ),
-                  Center(
-                    child: Icon(Icons.call),
-                  ),
+                  InvoiceCaptureView(),
+                  Center(child: Icon(Icons.settings)),
+
+                  /// CLIENT
+                  ClientView(),
                   ClientCaptureView(),
-                  Center(
-                    child: Icon(Icons.two_wheeler_outlined),
-                  ),
+                  Center(child: Icon(Icons.two_wheeler_outlined)),
                 ],
               ),
             ),

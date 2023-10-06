@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ledgerdot/package/sizeup_ext.dart';
-import 'package:ledgerdot/presentation/view/income/tabs/client/client_capture_model.dart';
 import 'package:ledgerdot/presentation/widget/ledger_button.dart';
 import 'package:raven/raven.dart';
 import 'package:stacked/stacked.dart';
 
-class ClientCaptureViewDesktop extends ViewModelWidget<ClientCaptureModel> {
+import '../client_model.dart';
+
+class ClientCaptureViewDesktop extends ViewModelWidget<ClientModel> {
   final TextEditingController clientNameController;
   final TextEditingController aliasController;
   final TextEditingController vatNoController;
@@ -33,7 +34,7 @@ class ClientCaptureViewDesktop extends ViewModelWidget<ClientCaptureModel> {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context, ClientCaptureModel viewModel) {
+  Widget build(BuildContext context, ClientModel viewModel) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(

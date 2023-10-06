@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:ledgerdot/presentation/view/income/tabs/client/client_capture_desktop.dart';
-import 'package:ledgerdot/presentation/view/income/tabs/client/client_capture_model.dart';
+import 'package:ledgerdot/presentation/view/income/tabs/client/client_capture/client_capture_desktop.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
+import '../client_model.dart';
 import 'client_capture_view.form.dart';
 
 @FormView(
@@ -20,11 +20,11 @@ import 'client_capture_view.form.dart';
     FormTextField(name: 'phoneNo'),
   ],
 )
-class ClientCaptureView extends StackedView<ClientCaptureModel> with $ClientCaptureView {
+class ClientCaptureView extends StackedView<ClientModel> with $ClientCaptureView {
   const ClientCaptureView({super.key});
 
   @override
-  Widget builder(BuildContext context, ClientCaptureModel viewModel, Widget? child) {
+  Widget builder(BuildContext context, ClientModel viewModel, Widget? child) {
     return ClientCaptureViewDesktop(
       clientNameController: clientNameController,
       aliasController: aliasController,
@@ -40,10 +40,10 @@ class ClientCaptureView extends StackedView<ClientCaptureModel> with $ClientCapt
   }
 
   @override
-  ClientCaptureModel viewModelBuilder(BuildContext context) => ClientCaptureModel();
+  ClientModel viewModelBuilder(BuildContext context) => ClientModel();
 
   @override
-  void onViewModelReady(ClientCaptureModel viewModel) {
+  void onViewModelReady(ClientModel viewModel) {
     syncFormWithViewModel(viewModel);
     viewModel.initializeForm();
   }

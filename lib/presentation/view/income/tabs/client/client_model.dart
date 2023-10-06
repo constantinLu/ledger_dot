@@ -3,11 +3,11 @@ import 'package:ledgerdot/domain/model/client.dart';
 import 'package:ledgerdot/domain/model/contact.dart';
 import 'package:ledgerdot/infrastructure/setup/router/app.locator.dart';
 import 'package:ledgerdot/infrastructure/setup/router/app.router.dart';
-import 'package:ledgerdot/presentation/view/income/tabs/client/client_capture_view.form.dart';
+import 'package:ledgerdot/presentation/view/income/tabs/client/client_capture/client_capture_view.form.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class ClientCaptureModel extends FormViewModel {
+class ClientModel extends FormViewModel {
   //final log = getLogger('PaymentCaptureViewModel');
   final _routerService = locator<RouterService>();
 

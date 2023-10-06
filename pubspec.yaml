@@ -19,7 +19,7 @@ dependencies:
   flutter_hooks:
 
   auto_route: ^7.8.3
-
+  pluto_grid:
   #fab speed buttons
   flutter_speed_dial:
   carousel_slider:

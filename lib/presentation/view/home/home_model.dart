@@ -30,4 +30,5 @@ class HomeModel extends IndexTrackingViewModel {
       HomeViewRoute(viewIndex: 1, tabIndex: tabIndex),
     );
   }
+
 }
